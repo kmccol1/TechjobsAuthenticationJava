@@ -1,8 +1,6 @@
 package org.launchcode.techjobsauth.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -10,8 +8,9 @@ import java.util.Objects;
 public abstract class AbstractEntity {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @SequenceGenerator(name="abstractentity_seq", sequenceName = "abstractentity_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "abstractentity_seq")
+    private Integer id;
 
     public int getId() {
         return id;
