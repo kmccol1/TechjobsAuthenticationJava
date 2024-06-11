@@ -16,10 +16,10 @@ import java.util.List;
 public class AuthenticationFilter implements HandlerInterceptor
 {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    AuthenticationController authenticationController;
+    private AuthenticationController authenticationController;
 
     private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
 
