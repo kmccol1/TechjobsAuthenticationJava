@@ -1,3 +1,22 @@
+.post-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+ }
+
+.post-title {
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.post-content {
+font-size: 1rem;
+color: #555;
+}
+
 .body-content {
     margin-top: 72px;
 }

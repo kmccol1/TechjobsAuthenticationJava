@@ -6,13 +6,14 @@ import org.launchcode.techjobsauth.models.data.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/posts")
 public class PostController
 {
@@ -49,8 +50,8 @@ public class PostController
         return "form";
     }
 
-    @PostMapping
-    public String createOrUpdatePost(@ModelAttribute("post") Post post)
+    @PostMapping("/submit")
+    public String createOrUpdatePost(@ModelAttribute Post post)
     {
         post.setCreatedAt(LocalDateTime.now());
         postRepository.save(post);
