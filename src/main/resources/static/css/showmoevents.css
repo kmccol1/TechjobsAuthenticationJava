@@ -84,3 +84,15 @@ div.job-listing {
 {
 margin-top: 200px;
 }
+
+.no-posts-message {
+font-size: 1.5em;
+color: #ff0000
+}
+
+.no-posts-container {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh; /* Viewport height */
+}
