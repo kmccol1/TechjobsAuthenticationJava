@@ -5,14 +5,19 @@
 <body>
 
 <div th:replace="fragments :: page-header"></div>
-
 <div class="container body-content">
-  <h2>TechJobs</h2>
-  <ul>
-    <li th:each="job : ${jobs}">
-      <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>
-    </li>
-  </ul>
+  <h1>Posts</h1>
+  <div th:if="${posts != null}">
+    <ul>
+      <li th:each="post: ${posts}">
+        <h2 th:text="${post.title}">Post Title</h2>
+        <p th:text="${post.content}">Post Content</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div th:if="${posts == null}">
+  <p>No posts currently available...</p>
 </div>
 </body>
 </html>
