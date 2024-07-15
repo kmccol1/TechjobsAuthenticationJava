@@ -5,73 +5,89 @@ import org.launchcode.techjobsauth.models.Post;
 import org.launchcode.techjobsauth.models.data.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/posts")
+//@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/posts")
 public class PostController
 {
     @Autowired
     private PostRepository postRepository;
 
-
-    @GetMapping
-    public String getAllPosts(Model model)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Post>> getAllPosts()
     {
-        model.addAttribute("posts", postRepository.findAll());
-        return "list";
+        //model.addAttribute("posts", postRepository.findAll());
+        //return "list";
+        return ResponseEntity.ok((List<Post>) postRepository.findAll());
     }
 
-    @GetMapping("/{id}")
-    public String getPost(@PathVariable Integer id, Model model)
+    @PostMapping("/create")
+    public ResponseEntity<Post> createPost(@RequestBody Post post)
     {
-        Optional<Post> post = postRepository.findById(id);
-        if(post.isPresent())
-        {
-            model.addAttribute("post",post.get());
-            return "view";
-        }
-        else
-        {
-            return "redirect:/posts";
-        }
+        Post savedPost = postRepository.save(post);
+        return new ResponseEntity<>(savedPost, HttpStatus.CREATED);
     }
 
-    @GetMapping("/new")
-    public String createPostForm(Model model)
+    @GetMapping("/test")
+    public String testEndpoint()
     {
-        model.addAttribute("post", new Post());
-        return "form";
+        return "Controller is working!";
     }
 
-    @PostMapping("/submit")
-    public String createOrUpdatePost(@ModelAttribute Post post)
-    {
-        post.setCreatedAt(LocalDateTime.now());
-        postRepository.save(post);
-        return "redirect:/";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String editPostForm(@PathVariable Integer id, Model model)
-    {
-        Optional<Post> post = postRepository.findById(id);
-        if(post.isPresent())
-        {
-            model.addAttribute("post",post.get());
-            return "form";
-        }
-        else
-        {
-            return "redirect:/posts";
-        }
-    }
+//    @GetMapping("/{id}")
+//    public String getPost(@PathVariable Integer id, Model model)
+//    {
+//        Optional<Post> post = postRepository.findById(id);
+//        if(post.isPresent())
+//        {
+//            model.addAttribute("post",post.get());
+//            return "view";
+//        }
+//        else
+//        {
+//            return "redirect:/posts";
+//        }
+//    }
+//
+//    @GetMapping("/new")
+//    public String createPostForm(Model model)
+//    {
+//        model.addAttribute("post", new Post());
+//        return "form";
+//    }
+//
+//    @PostMapping("/submit")
+//    public String createOrUpdatePost(@ModelAttribute Post post)
+//    {
+//        post.setCreatedAt(LocalDateTime.now());
+//        postRepository.save(post);
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/edit/{id}")
+//    public String editPostForm(@PathVariable Integer id, Model model)
+//    {
+//        Optional<Post> post = postRepository.findById(id);
+//        if(post.isPresent())
+//        {
+//            model.addAttribute("post",post.get());
+//            return "form";
+//        }
+//        else
+//        {
+//            return "redirect:/posts";
+//        }
+//    }
 
 //    @PostMapping
 //    public ResponseEntity<Post> createPost(@RequestBody Post post)

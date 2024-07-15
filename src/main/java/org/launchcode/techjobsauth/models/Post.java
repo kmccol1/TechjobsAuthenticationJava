@@ -21,7 +21,7 @@ public class Post extends AbstractEntity
     @NotBlank
     private String content;
 
-    private LocalDateTime createdAt;
+    //private LocalDateTime createdAt;
 
     //private User user;
 
@@ -33,11 +33,12 @@ public class Post extends AbstractEntity
     }
 
 //    public Post(String message, LocalDateTime created, User user, List<Comment> list)
-    public Post(String message, LocalDateTime created, User user)
+    public Post(String title, String content)
     {
         super();
-        this.content = message;
-        this.createdAt = created;
+        this.title = title;
+        this.content = content;
+        //this.createdAt = created;
         //this.user = user;
         //this.comments = list;
     }
@@ -71,13 +72,13 @@ public class Post extends AbstractEntity
         this.content = content;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+//    public LocalDateTime getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(LocalDateTime createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
 //    public User getUser() {
 //        return user;
